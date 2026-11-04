@@ -1,0 +1,78 @@
+﻿
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ProductCatalog</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProductCatalog.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg catalog-navbar">
+            <div class="container">
+                <a class="navbar-brand catalog-logo" href="/Product">
+                    <span class="logo-icon">🛍️</span>
+                    Product<span>Catalog</span>
+                </a>
+
+                <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Product">Басты бет</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Product#products">Каталог</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Product/Favorites">♡ Таңдаулылар
+                            <span id="favorite-count" class="favorite-count">0</span>  </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#footer">Біз туралы</a>
+                        </li>
+                        <li class="nav-item ms-lg-3">
+                            <a class="navbar-button" href="/Product#products">
+                                Тауарларды көру →
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="catalog-footer" id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <a href="/Product" class="footer-logo">🛍️ ProductCatalog</a>
+                    <p>Өзіңе керектінің барлығы бір жерде.</p>
+                </div>
+                <div class="footer-right">
+                    <span>© 2026 ProductCatalog</span>
+                    <span>Сапа мен ыңғайлылық — біздің таңдауымыз.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

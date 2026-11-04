@@ -1,0 +1,58 @@
+
+@model List<ProductCatalog.Models.Product>
+
+@{
+    ViewData["Title"] = "Таңдаулылар";
+    Layout = "_Layout";
+}
+
+<div class="catalog-container">
+
+    <div class="catalog-heading">
+        <div>
+            <span class="section-label">МЕНІҢ ЖИНАҒЫМ</span>
+            <h2>♡ Таңдаулылар</h2>
+            <p>Өзің ұнатқан тауарлар осы жерде сақталады.</p>
+        </div>
+    </div>
+
+    <div id="favorites-list" class="row g-4">
+        @foreach (var product in Model)
+        {
+            <div class="col-12 col-sm-6 col-lg-4 favorite-item"
+                 data-product-id="@product.Id">
+
+                <partial name="_ProductCard" model="product" />
+
+            </div>
+        }
+    </div>
+
+    <div id="empty-favorites" class="empty-favorites" style="display:none;">
+        <div>♡</div>
+        <h3>Таңдаулылар әзірге бос</h3>
+        <p>Каталогтан ұнаған тауарларыңа жүрекше бас.</p>
+        <a href="/Product" class="details-button">Каталогқа өту</a>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+        document.querySelectorAll(".favorite-item").forEach(item => {
+            const id = item.dataset.productId;
+
+            if (!favorites.includes(id)) {
+                item.remove();
+            }
+        });
+
+        const remaining = document.querySelectorAll(".favorite-item").length;
+
+        if (remaining === 0) {
+            document.getElementById("empty-favorites").style.display = "block";
+        }
+    });
+</script>

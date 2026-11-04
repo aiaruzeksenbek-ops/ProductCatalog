@@ -1,0 +1,95 @@
+
+@model List<ProductCatalog.Models.Product>
+
+@{
+    ViewData["Title"] = "Тауарлар каталогы";
+    Layout = "_Layout";
+}
+
+<div class="catalog-container">
+
+    <!-- Hero section -->
+    <section class="catalog-hero">
+        <div>
+            <span class="hero-label">PRODUCT CATALOG</span>
+
+            <h1>Өзіңе керектінің<br />
+                барлығы бір жерде.</h1>
+
+            <p>
+                Сапалы тауарлар, тиімді бағалар және
+                ыңғайлы таңдау.
+            </p>
+
+            <a href="#products" class="catalog-button">
+                Каталогты көру →
+            </a>
+        </div>
+
+        <div class="hero-decoration">
+            <span>🛍️</span>
+        </div>
+    </section>
+
+    <!-- Catalog heading -->
+    <section class="catalog-section" id="products">
+
+        <div class="catalog-heading">
+            <div>
+                <span class="section-label">БІЗДІҢ ҰСЫНЫСТАР</span>
+                <h2>Барлық тауарлар</h2>
+                <p>Өзіңе ұнайтын тауарды таңда.</p>
+            </div>
+
+            <div class="product-count">
+                @Model.Count() тауар
+            </div>
+        </div>
+
+<!-- Search and Filter -->
+<form method="get" action="/Product" class="catalog-filters">
+    <div class="search-box">
+        <span>🔍</span>
+        <input
+            type="text"
+            name="search"
+            value="@ViewBag.Search"
+            placeholder="Тауар атауын немесе категориясын іздеу..." />
+        <button type="submit">Іздеу</button>
+    </div>
+
+    <select name="category" onchange="this.form.submit()">
+        <option value="">Барлық категориялар</option>
+
+        @foreach (var category in ViewBag.Categories)
+        {
+            if ((string)category == (string)ViewBag.SelectedCategory)
+            {
+                <option value="@category" selected>@category</option>
+            }
+            else
+            {
+                <option value="@category">@category</option>
+            }
+        }
+    </select>
+
+    <a href="/Product" class="reset-filter">Тазарту</a>
+</form>
+
+        <!-- Product cards -->
+        <div class="row g-4">
+
+            @foreach (var product in Model)
+            {
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <partial name="_ProductCard"
+                             model="product" />
+                </div>
+            }
+
+        </div>
+
+    </section>
+
+</div>

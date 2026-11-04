@@ -1,0 +1,71 @@
+
+@model ProductCatalog.Models.Product
+
+@{
+    ViewData["Title"] = Model.Name;
+    Layout = "_Layout";
+}
+
+<div class="details-container">
+
+    <a href="/Product" class="back-link">← Каталогқа оралу</a>
+
+    <div class="details-card">
+
+        <div class="details-image">
+            @if (Model.Category == "Электроника")
+            {
+                <span>💻</span>
+            }
+            else if (Model.Category == "Аксессуар" && Model.Id == 2)
+            {
+                <span>🎧</span>
+            }
+            else if (Model.Id == 4)
+            {
+                <span>🖱️</span>
+            }
+            else
+            {
+                <span>⌨️</span>
+            }
+        </div>
+
+        <div class="details-info">
+
+            <span class="details-category">@Model.Category</span>
+
+            <h1>@Model.Name</h1>
+
+            <p class="details-description">
+                @Model.Description
+            </p>
+
+            <h2 class="details-price">
+                @Model.Price.ToString("N0") ₸
+            </h2>
+
+            <div class="details-availability">
+                @if (Model.IsAvailable)
+                {
+                    <span class="availability available">
+                        ● Қолжетімді
+                    </span>
+                }
+                else
+                {
+                    <span class="availability unavailable">
+                        ● Қазір жоқ
+                    </span>
+                }
+            </div>
+
+            <div class="details-buttons">
+                <a href="/Product" class="details-button">
+                    Каталогқа қайту
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>

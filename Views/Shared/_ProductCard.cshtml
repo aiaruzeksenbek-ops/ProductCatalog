@@ -1,0 +1,59 @@
+
+@model ProductCatalog.Models.Product
+
+@{
+    string imageUrl = Model.Id switch
+    {
+        1 => "https://ir.ozone.ru/s3/multimedia-b/c1000/6344823491.jpg",
+        2 => "https://sonycenter.kz/image/cache/catalog/products/new_img/audio/whch720n/naushniki-sony-whch720n-14-600x600.png",
+        3 => "https://forcecom.kz/upload/iblock/93a/93a65f031adfb02f65adb40e5cbedb1b.jpg",
+        4 => "https://cdn.insales-shop.ru/images/products/1/2051/611108867/00-00056922-1-515Wx515H.jpg",
+        _ => ""
+    };
+}
+
+<div class="card product-card h-100 border-0 shadow-sm">
+
+    <div class="product-image-wrapper">
+        <img src="@imageUrl"
+             alt="@Model.Name"
+             class="product-image"
+             loading="lazy" />
+    </div>
+
+    <div class="card-body d-flex flex-column">
+
+        <span class="category-label">@Model.Category</span>
+
+        <h5 class="product-name mt-2">@Model.Name</h5>
+
+        <h4 class="product-price mt-2">
+            @Model.Price.ToString("N0") ₸
+        </h4>
+
+        <div class="mt-auto pt-3">
+            @if (Model.IsAvailable)
+            {
+                <span class="availability available">● Қолжетімді</span>
+            }
+            else
+            {
+                <span class="availability unavailable">● Қазір жоқ</span>
+            }
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between mt-3">
+            <a href="/Product/Details/@Model.Id" class="product-details-label">
+                Толығырақ көру →
+            </a>
+
+            <button type="button"
+                    class="favorite-button"
+                    data-product-id="@Model.Id"
+                    title="Таңдаулыларға қосу">
+                ♡
+            </button>
+        </div>
+
+    </div>
+</div>
